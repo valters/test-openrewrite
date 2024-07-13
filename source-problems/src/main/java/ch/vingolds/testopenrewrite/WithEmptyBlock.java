@@ -31,6 +31,7 @@ public class WithEmptyBlock {
           || ((Extender) arg).isSomeOtherClass()) {
       } else {
         System.out.println("This line should not be executed!");
+        throw new RuntimeException("code should not reach here! if you see this, rewrite has messed up.");
       }
     }
   }
