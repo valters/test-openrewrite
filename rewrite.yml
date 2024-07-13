@@ -1,0 +1,28 @@
+---
+type: specs.openrewrite.org/v1beta/style
+name: ch.vingolds.test-openrewrite.style.Testing
+styleConfigs:
+  - org.openrewrite.java.style.ImportLayoutStyle:
+      classCountToUseStarImport: 9999
+      nameCountToUseStarImport: 9999
+      layout:
+        - import java.*
+        - <blank line>
+        - import javax.*
+        - <blank line>
+        - import org.*
+        - <blank line>
+        - import com.*
+        - <blank line>
+        - import all other imports
+        - <blank line>
+        - import static all other imports
+  - org.openrewrite.style.GeneralFormatStyle:
+      useCRLFNewLines: false
+  - org.openrewrite.java.style.TabsAndIndentsStyle:
+      useTabCharacter: false
+      tabSize: 2
+      indentSize: 2
+      continuationIndent: 4
+      indentsRelativeToExpressionStart: false
+      useCRLFNewLines: false

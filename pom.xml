@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ch.vingolds.test-openrewrite</groupId>
+    <artifactId>parent-test-openrewrite</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>source-problems</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.openrewrite.maven</groupId>
+                    <artifactId>rewrite-maven-plugin</artifactId>
+                    <version>5.35.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.openrewrite.recipe</groupId>
+                            <artifactId>rewrite-static-analysis</artifactId>
+                            <version>1.11.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>openrewrite</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openrewrite.maven</groupId>
+                        <artifactId>rewrite-maven-plugin</artifactId>
+                        <configuration>
+                            <activeRecipes>
+                                <recipe>org.openrewrite.java.format.NormalizeLineBreaks</recipe>
+                                <recipe>org.openrewrite.java.format.EmptyNewlineAtEndOfFile</recipe>
+                                <recipe>org.openrewrite.java.format.RemoveTrailingWhitespace</recipe>
+                                <recipe>org.openrewrite.java.format.NormalizeTabsOrSpaces</recipe>
+                                <recipe>org.openrewrite.java.OrderImports</recipe>
+                                <recipe>org.openrewrite.staticanalysis.NeedBraces</recipe>
+                                <recipe>org.openrewrite.staticanalysis.EmptyBlock</recipe>
+                            </activeRecipes>
+                            <activeStyles>
+                                <style>ch.vingolds.test-openrewrite.style.Testing</style>
+                            </activeStyles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
